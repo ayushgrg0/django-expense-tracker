@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--l^ngf9=(%3##ih7^r^o=!)r78**p7u##pbm(izqbwd*x=h2s^'
+SECRET_KEY = 'django-insecure-5(239zm!85pu@j2^r2$o7&i(ll#aev51d8l&)#wr7qtnp%9hkv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -47,15 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ] + THIRD_PARTY_APPS + LOCAL_APPS
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -143,6 +134,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -150,3 +142,6 @@ AUTHENTICATION_BACKENDS = [
     # `allauth` specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+LOGIN_REDIRECT_URL = 'home'  # Change this to your home page URL name
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home' # Optional: also redirect to home after logout
