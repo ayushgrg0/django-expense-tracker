@@ -43,3 +43,18 @@ def expense_edit(request, expense_id):
         form.save()
         messages.success(request, 'Expense updated successfully!')
         return redirect('home') 
+
+def expense_delete(request, expense_id):
+    template_name = 'expense/delete.html'
+    expense_details = Expense.objects.get(id=expense_id)
+
+    if request.method == 'GET':
+        context = {
+            'expense': expense_details
+            }
+        return render(request, template_name, context)
+    
+    else:
+        expense_details.delete()
+        messages.success(request, 'Expense deleted successfully!')
+        return redirect('home')
