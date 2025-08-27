@@ -39,6 +39,11 @@ THIRD_PARTY_APPS = [
     'allauth.account',
 ]
 
+THEMES = [
+    'crispy_forms',
+    'crispy_bootstrap5',
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-] + THIRD_PARTY_APPS + LOCAL_APPS
+] + THIRD_PARTY_APPS + LOCAL_APPS + THEMES
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -145,3 +150,6 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_REDIRECT_URL = 'home'  # Change this to your home page URL name
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home' # Optional: also redirect to home after logout
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
