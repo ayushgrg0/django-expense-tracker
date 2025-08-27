@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from expense.models import Expense
 from .forms import ExpenseForm
 from django.shortcuts import render, redirect
@@ -8,7 +9,23 @@ from django.contrib import messages
 def expense_list(request):
     template_name = 'expense/home.html'
     expense_list = Expense.objects.all()
-    context = {'expense_list': expense_list}
+
+    total_budget = 20000  
+
+    total_expenses = Expense.objects.aggregate(total=Sum('amount'))['total'] or 0
+    
+    remaining_budget = total_budget - total_expenses
+
+    alert = None
+    if remaining_budget <= 0:
+        alert = f"⚠️ Your budget of ₹{total_budget} has been exhausted!"
+    context = {
+        'expense_list': expense_list,
+        'total_budget': total_budget,
+        'remaining_budget': remaining_budget,
+        'alert': alert,
+        'total_expenses': total_expenses,
+        }
     return render(request, template_name, context)
 
 def expense_add(request):

@@ -78,10 +78,12 @@
                             </td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{% url 'edit_expense' expense.id %}" class="btn btn-sm btn-outline-primary">
+                                    <a href="{% url 'edit_expense' expense.id %}"
+                                        class="btn btn-sm btn-outline-primary">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="{% url 'delete_expense' expense.id %}" class="btn btn-sm btn-outline-danger">
+                                    <a href="{% url 'delete_expense' expense.id %}"
+                                        class="btn btn-sm btn-outline-danger">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </div>
@@ -109,7 +111,7 @@
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Total Budget</h5>
-                <p class="card-text display-6">₹ 20,000</p>
+                <p class="card-text display-6">₹ {{ total_budget|floatformat:2 }}</p>
             </div>
         </div>
     </div>
@@ -117,18 +119,26 @@
         <div class="card h-100">
             <div class="card-body">
                 <h5 class="card-title">Total Expenses</h5>
-                <p class="card-text display-6">₹ 0.00</p>
+                <p class="card-text display-6">{{ total_expenses|floatformat:2 }}</p>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
+    <div class="col-md-3 mb-4">
         <div class="card h-100">
             <div class="card-body">
-                <h5 class="card-title">This Month</h5>
-                <p class="card-text display-6">₹ 0.00</p>
+                <h5 class="card-title">Remaining Budget</h5>
+                <p class="card-text display-6 
+                    {% if remaining_budget <= 0 %}text-danger{% else %}text-success{% endif %}">
+                    ₹ {{ remaining_budget|floatformat:2 }}
+                </p>
             </div>
         </div>
     </div>
+    {% if alert %}
+    <div class="alert alert-danger mt-3">
+        {{ alert }}
+    </div>
+    {% endif %}
 </div>
 {% else %}
 <div class="row justify-content-center">
