@@ -25,3 +25,21 @@ def expense_add(request):
         form.save()
         messages.success(request, 'Expense added successfully!')
         return redirect('home')
+
+
+def expense_edit(request, expense_id):
+    template_name = 'expense/add_expense.html'
+    expense_details = Expense.objects.get(id=expense_id)
+
+    if request.method == 'GET':
+        form: ExpenseForm = ExpenseForm(instance=expense_details)
+        context = {
+            'form': form
+            }
+        return render(request, template_name, context)
+    
+    else :
+        form = ExpenseForm(request.POST , instance = expense_details)
+        form.save()
+        messages.success(request, 'Expense updated successfully!')
+        return redirect('home') 
