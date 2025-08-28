@@ -74,13 +74,13 @@
                                 {% url 'account_login' as login_url_ %}
                                 {% if login_url_ %}
                                     <li class="nav-item">
-                                        <a class="nav-link btn btn-outline-primary ms-2" href="{{ login_url_ }}">{% trans "Sign In" %}</a>
+                                        <a class="nav-link btn btn-outline-success ms-2" href="{{ login_url_ }}">{% trans "Sign In" %}</a>
                                     </li>
                                 {% endif %}
                                 {% url 'account_signup' as signup_url_ %}
                                 {% if signup_url_ %}
                                     <li class="nav-item">
-                                        <a class="nav-link btn btn-primary ms-2" href="{{ signup_url_ }}">{% trans "Sign Up" %}</a>
+                                        <a class="nav-link btn btn-success ms-2" href="{{ signup_url_ }}">{% trans "Sign Up" %}</a>
                                     </li>
                                 {% endif %}
                             {% endif %}

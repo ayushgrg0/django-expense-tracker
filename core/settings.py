@@ -31,12 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 LOCAL_APPS = [
-    'expense',
+    "expense",
 ]
 
 THIRD_PARTY_APPS = [
-    'allauth',
-    'allauth.account',
+    "allauth",
+    "allauth.account",
+    "debug_toolbar",
 ]
 
 THEMES = [
@@ -59,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     # Add the account middleware:
     "allauth.account.middleware.AccountMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -153,3 +155,8 @@ ACCOUNT_LOGOUT_REDIRECT_URL = 'home' # Optional: also redirect to home after log
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

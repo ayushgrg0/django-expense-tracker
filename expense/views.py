@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Sum
 from datetime import date
+import csv
+from django.http import HttpResponse
 
 
 
@@ -103,3 +105,37 @@ def expense_delete(request, expense_id):
         expense_details.delete()
         messages.success(request, "Expense deleted successfully!")
         return redirect("home")
+
+def export_expenses_csv(request):
+    today = date.today()
+    current_month = today.month
+    current_year = today.year
+
+    # Get monthly expenses
+    monthly_expenses = Expense.objects.filter(
+        date__year=current_year,
+        date__month=current_month
+    )
+
+    # Create the HttpResponse object with CSV header
+    response = HttpResponse(
+        content_type='text/csv',
+        headers={'Content-Disposition': f'attachment; filename="monthly_expenses_{current_month}_{current_year}.csv"'},
+    )
+
+    writer = csv.writer(response)
+    # Write CSV header
+    writer.writerow(['Title', 'Category', 'Amount', 'Description', 'Date', 'Recurring'])
+
+    # Write each expense row
+    for expense in monthly_expenses:
+        writer.writerow([
+            expense.title,
+            expense.category,
+            expense.amount,
+            expense.description,
+            expense.date.strftime('%Y-%m-%d'),
+            expense.recurrence if expense.is_recurring else 'No'
+        ])
+
+    return response
